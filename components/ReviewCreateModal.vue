@@ -12,7 +12,7 @@
                 />
             </a-form-item>
             <a-form-item label="Nhận xét:">
-                <a-textarea v-model:values="review.comment" :rows="4" placeholder="Đánh giá về sản phẩm của chúng tôi" />
+                <a-textarea v-model:value="review.comment" :rows="4" placeholder="Đánh giá về sản phẩm của chúng tôi" />
             </a-form-item>
             <a-form-item>
                 <a-button type="primary" class="text-center" html-type="submit">Gửi đánh giá</a-button>
