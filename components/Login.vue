@@ -16,7 +16,7 @@
 
             <a-form-item class="text-center mt-8 mb-2">
                 <a-button size="middle" type="ghost" class="w-full mx-auto bg-red-500 text-white hover:text-white"
-                    html-type="submit">Đăng
+                    html-type="submit" :loading="isLoading">Đăng
                     nhập</a-button>
             </a-form-item>
         </a-form>
@@ -42,6 +42,8 @@ const { isLoginModalOpen, closeLoginModal, openRegisterModal } = authModal;
 const authStore = useAuthStore();
 const { setUser, setAccessToken } = authStore;
 
+const isLoading = ref(false);
+
 interface LoginFormData {
     email: string;
     password: string;
@@ -65,6 +67,7 @@ const handleOpenRegisterModal = () => {
 
 const handleLogin = async () => {
     try {
+        isLoading.value = true;
         await formRef.value.validate();
         await $fetch<LoginResponse>('login', {
             method: 'POST',
@@ -84,6 +87,9 @@ const handleLogin = async () => {
         })
     } catch (error) {
         console.log('error :>> ', error);
+    }
+    finally {
+        isLoading.value = false;
     }
 };
 const router = useRouter();
